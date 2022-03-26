@@ -16,8 +16,8 @@
             @foreach($posts as $post)
           <tr>
             <th scope="row">{{$post->title}}</th>
-            <td colspan="2">{{$post->paragraph}}</td>
-            <td colspan='2'>{{$post->slug}}</td>
+            <td colspan="1">{{$post->content}}</td>
+            <td colspan='1'>{{$post->slug}}</td>
             <td colspan='2'>{{$post->id}}</td>
           </tr>
           @endforeach
