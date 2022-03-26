@@ -62,10 +62,12 @@
                 margin-bottom: 30px;
             }
         </style>
+        <link rel="stylesheet" href="{{asset('css/app.css')}}" type="text/css">
+        <script src="{{asset('js/front.js')}}"defer></script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+           {{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/admin') }}">Home</a>
@@ -77,9 +79,10 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif--}}
 
             <div class="content">
+                
                 <div id="root"></div>
             </div>
         </div>
