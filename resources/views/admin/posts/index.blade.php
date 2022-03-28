@@ -6,19 +6,21 @@
     <table class="table">
         <thead>
           <tr>
+            <th scope="col">id</th>
             <th scope="col">Title</th>
             <th scope="col">Paragraph</th>
             <th scope="col">slug</th>
-            <th scope="col">id</th>
           </tr>
         </thead>
         <tbody>
             @foreach($posts as $post)
           <tr>
-            <th scope="row">{{$post->title}}</th>
+            <th scope="row">{{$post->id}}</td>
+
+            <td colspan="1">{{$post->title}}</th>
             <td colspan="1">{{$post->content}}</td>
             <td colspan='1'>{{$post->slug}}</td>
-            <td colspan='2'>{{$post->id}}</td>
+            <td><a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-info">Info</a></td>
           </tr>
           @endforeach
           

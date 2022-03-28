@@ -26,7 +26,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -46,9 +45,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $posts, $id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -59,7 +59,6 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
