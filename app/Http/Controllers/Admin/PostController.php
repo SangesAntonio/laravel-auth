@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Post;
 
 class PostController extends Controller
@@ -26,6 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,7 +38,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:100|min:2',
+            'content' => 'required',
+            'image' => 'unique:posts'
+
+        ], [
+            'required' => 'Il campo :attribute è obbligatorio',
+            'content.min' => 'La lunghezza minima è :min',
+            'unique' => "L \'immagine $request->image è già presente!"
+        ]);
+        $data = $request->all();
+        $request->slug = Str::slug($request->title, '-');
+
+        $post = new Post();
+        $post->fill($data);
+        $post->save();
+        return redirect()->route('admin.posts.index', compact('post'));
     }
 
     /**
@@ -57,8 +75,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -68,9 +88,24 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:100|min:2',
+            'content' => 'required',
+            'image' => 'unique:posts'
+
+        ], [
+            'required' => 'Il campo :attribute è obbligatorio',
+            'content.min' => 'La lunghezza minima è :min',
+            'unique' => "L \'immagine $request->image è già presente!"
+        ]);
+        $request->slug = Str::slug($request->title, '-');
+        $data = $request->all();
+
+        $post->update($data);
+
+        return redirect()->route('admin.posts.show', $post);
     }
 
     /**
@@ -79,8 +114,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+
+
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
