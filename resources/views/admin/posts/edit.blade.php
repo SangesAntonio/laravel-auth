@@ -12,7 +12,7 @@
           </div>
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto post</label>
-            <textarea class="form-control" id="content" placeholder="A cosa stai pensando?" name="content" value="{{ old('content', $post->content) }}"></textarea>
+            <textarea class="form-control" id="content" placeholder="A cosa stai pensando?" name="content" >{{ old('content', $post->content) }}</textarea>
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Carica immagine</label>

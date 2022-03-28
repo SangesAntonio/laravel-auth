@@ -54,7 +54,7 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($data);
         $post->save();
-        return redirect()->route('admin.posts.index', compact('post'));
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -92,12 +92,11 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|max:100|min:2',
-            'content' => 'required',
+
             'image' => 'unique:posts'
 
         ], [
             'required' => 'Il campo :attribute è obbligatorio',
-            'content.min' => 'La lunghezza minima è :min',
             'unique' => "L \'immagine $request->image è già presente!"
         ]);
         $request->slug = Str::slug($request->title, '-');
@@ -116,10 +115,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-
-
         $post->delete();
-
         return redirect()->route('admin.posts.index');
     }
 }

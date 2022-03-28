@@ -16,7 +16,7 @@
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="title" placeholder="Titolo post" name="title">
+            <input type="text" class="form-control" id="title" placeholder="Titolo post" name="title" value=" {{old('title', $post->title)}}">
           </div>
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto post</label>
@@ -26,10 +26,7 @@
             <label for="image" class="form-label">Carica immagine</label>
             <input type="text" class="form-control" id="image" placeholder="Inserisci url immagine" name="imag">
           </div>
-
           <button type="submit" class='btn btn-primary'>Aggiungi Post</button>
-
     </form>
 </div>
-
 @endsection
