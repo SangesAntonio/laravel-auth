@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -49,10 +49,10 @@ class PostController extends Controller
             'unique' => "L \'immagine $request->image è già presente!"
         ]);
         $data = $request->all();
-        $request->slug = Str::slug($request->title, '-');
 
         $post = new Post();
         $post->fill($data);
+        $post->slug = Str::slug($post->title, '-');
         $post->save();
         return redirect()->route('admin.posts.index');
     }
